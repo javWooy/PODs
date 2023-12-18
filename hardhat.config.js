@@ -2,7 +2,7 @@ require("dotenv").config();
 require("@nomiclabs/hardhat-waffle");
 
 module.exports = {
-  solidity: "0.8.19",
+  solidity: "0.8.20",
   networks: {
     mumbai: {
       url: `https://polygon-mumbai.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
