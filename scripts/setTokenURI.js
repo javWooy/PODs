@@ -1,7 +1,7 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const deployedContractAddress = "0x4e6a21E0521340899824180B9a99E6A6946BD0b7";
+  const deployedContractAddress = "0xC715d092d1292DA20643BE396f2f8051Cab82970";
 
   const [deployer] = await ethers.getSigners();
 
@@ -9,7 +9,7 @@ async function main() {
   const proofOfDonationNFT = await ProofOfDonationNFT.attach(deployedContractAddress);
 
   // Array of token IDs to set URI for
-  const tokenIds = [1]; // Replace with actual token IDs
+  const tokenIds = [1, 2, 3]; // Replace with actual token IDs
   const newURI = "https://ipfs.filebase.io/ipfs/QmUHdFw6ZUudwoWeVDRWTcHvqdWHrmsfAxGQhDz9zS9ZUp"; // The new URI for all tokens
 
   // Setting the same URI for a batch of token IDs

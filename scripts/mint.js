@@ -2,7 +2,7 @@ const { ethers } = require("hardhat");
 
 async function main() {
   // Replace with your contract's deployed address
-  const deployedContractAddress = '0x4e6a21E0521340899824180B9a99E6A6946BD0b7';
+  const deployedContractAddress = '0xC715d092d1292DA20643BE396f2f8051Cab82970';
 
   // The account you want to send a transaction from
   const [deployer] = await ethers.getSigners();
