@@ -2,39 +2,33 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract ProofOfDonationNFT is ERC1155, Ownable, ReentrancyGuard {
-    // Mapping from token ID to the URI
+contract ProofOfDonationNFT is ERC1155, Ownable {
     mapping(uint256 => string) private _tokenURIs;
 
     constructor() ERC1155("https://token-cdn-domain/{id}.json") Ownable(msg.sender) {
-        // Constructor can be used to mint initial batches if necessary
+        // Constructor logic if needed
     }
 
     // Override the uri function to return the full URI for each token
-    function uri(uint256 tokenId) override public view returns (string memory) {
+    function uri(uint256 tokenId) public view override returns (string memory) {
         return _tokenURIs[tokenId];
     }
 
-    // A secure mint function that prevents reentrancy attacks
-    function mint(address to, uint256 tokenId, uint256 amount, bytes memory data) 
-        public onlyOwner nonReentrant {
-        require(to != address(0), "ProofOfDonationNFT: mint to the zero address");
-        require(amount > 0, "ProofOfDonationNFT: mint amount must be positive");
-
-        _mint(to, tokenId, amount, data);
-        emit Minted(to, tokenId, amount);
-    }
-
-    // A secure mintBatch function that prevents reentrancy attacks
-    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data) 
-        public onlyOwner nonReentrant {
+    // Modified mintBatch function to include URI setting
+    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, string[] memory newURIs, bytes memory data) 
+        public onlyOwner {
         require(to != address(0), "ProofOfDonationNFT: mint to the zero address");
         require(ids.length == amounts.length, "ProofOfDonationNFT: ids and amounts length mismatch");
+        require(ids.length == newURIs.length, "ProofOfDonationNFT: ids and URIs length mismatch");
 
         _mintBatch(to, ids, amounts, data);
+
+        for (uint256 i = 0; i < ids.length; i++) {
+            setTokenURI(ids[i], newURIs[i]);  // Set the token URI for each id
+        }
+
         emit MintedBatch(to, ids, amounts);
     }
 
@@ -45,20 +39,6 @@ contract ProofOfDonationNFT is ERC1155, Ownable, ReentrancyGuard {
         emit URI(newURI, tokenId);
     }
 
-    // Function to set the same URI for a batch of token IDs
-    function setBatchTokenURI(uint256[] memory tokenIds, string memory newURI) public onlyOwner {
-        require(bytes(newURI).length > 0, "ProofOfDonationNFT: URI should be set");
-        for (uint256 i = 0; i < tokenIds.length; i++) {
-            _tokenURIs[tokenIds[i]] = newURI;
-            emit URI(newURI, tokenIds[i]);
-        }
-    }
-
     // Events for logging actions on the blockchain
-    event Minted(address indexed to, uint256 indexed tokenId, uint256 amount);
     event MintedBatch(address indexed to, uint256[] ids, uint256[] amounts);
-
-    // Additional functions like burn and burnBatch could be added for token management
-
-    // ... additional code for more complex logic or features ...
 }
