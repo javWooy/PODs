@@ -1,2 +1,2 @@
 # PODs
-PODs entorno de testing
+PODs entorno de test
