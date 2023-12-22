@@ -24,7 +24,7 @@ Mint new tokens by running:
 npx hardhat run scripts/mint.js --network rskTestnet
 ```
 
-### Setting Token URIs
+### Setting/editing Token URIs
 Update the token URIs using:
 ```bash
 npx hardhat run scripts/setTokenURI.js --network rskTestnet
