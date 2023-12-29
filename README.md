@@ -23,12 +23,14 @@ Mint new tokens by running:
 ```bash
 npx hardhat run scripts/mint.js --network rskTestnet
 ```
+(You need to update the contract address)
 
 ### Setting/editing Token URIs
 Update the token URIs using:
 ```bash
 npx hardhat run scripts/setTokenURI.js --network rskTestnet
 ```
+(You need to update the contract address)
 
 ## Configuration
 Configure the project settings in `hardhat.config.js`, including network settings and other parameters.
