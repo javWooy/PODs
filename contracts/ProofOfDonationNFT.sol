@@ -7,13 +7,22 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract ProofOfDonationNFT is ERC1155, Ownable {
     mapping(uint256 => string) private _tokenURIs;
 
-    constructor() ERC1155("https://token-cdn-domain/{id}.json") Ownable(msg.sender) {
+     // Contract name
+    string public name;
+    // Contract symbol
+    string public symbol;
+
+
+    constructor(string memory _name, string memory _symbol) ERC1155("https://token-cdn-domain/{id}.json") Ownable(msg.sender) {
         // Constructor logic if needed
+        name = _name;
+        symbol = _symbol;
     }
 
     // Override the uri function to return the full URI for each token
     function uri(uint256 tokenId) public view override returns (string memory) {
         return _tokenURIs[tokenId];
+
     }
 
     // Modified mintBatch function to include URI setting
