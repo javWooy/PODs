@@ -3,7 +3,7 @@ async function main() {
     console.log("Deploying contracts with the account:", deployer.address);
   
     const ProofOfDonationNFT = await ethers.getContractFactory("ProofOfDonationNFT");
-    const proofOfDonationNFT = await ProofOfDonationNFT.deploy();
+    const proofOfDonationNFT = await ProofOfDonationNFT.deploy("Wooy - Proof of Donation (PODs)", "PODs");
   
     console.log("ProofOfDonationNFT deployed to:", proofOfDonationNFT.address);
   }
