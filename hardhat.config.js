@@ -1,8 +1,9 @@
 require("dotenv").config();
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-etherscan");
 
 module.exports = {
-  solidity: "0.8.20",
+  solidity: "0.8.22",
   networks: {
     rskTestnet: {
       url: "https://public-node.testnet.rsk.co",
@@ -23,4 +24,20 @@ module.exports = {
     cache: "./cache",
     artifacts: "./artifacts"
   },
+  etherscan: {
+    apiKey: {
+      rskTestnet: '${process.env.ETHERSCAN_APIKEY}'
+    },
+    customChains: [
+      {
+        network: "rskTestnet",
+        chainId:31,
+        urls: {
+          apiURL: "https://rootstock-testnet.blockscout.com/api",
+          browserURL: "https://rootstock-testnet.blockscout.com/"
+        }
+      }
+    ]
+  }
 };
+
