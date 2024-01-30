@@ -1,6 +1,6 @@
 require("dotenv").config();
 require("@nomiclabs/hardhat-waffle");
-require("@nomiclabs/hardhat-etherscan");
+require("@nomicfoundation/hardhat-verify");
 
 module.exports = {
   solidity: "0.8.22",
@@ -24,6 +24,10 @@ module.exports = {
     cache: "./cache",
     artifacts: "./artifacts"
   },
+  sourcify: {
+    enabled: true
+  },
+
   etherscan: {
     apiKey: {
       rskTestnet: '${process.env.ETHERSCAN_APIKEY}'
@@ -40,4 +44,3 @@ module.exports = {
     ]
   }
 };
-
